@@ -48,5 +48,5 @@ docker run -d \
  -e HOST_NAME=myhostname \
  -e GRAPHITE_HOST=graphite.glinux.top \
  --name collectd \
- collectd:latest
+ williamguozi/collectd:latest
 ```
