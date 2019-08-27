@@ -1,5 +1,6 @@
-# collectd-graphite
+# collectd
 
+Monitor group: grafana & graphite & collectd, collectd is member of group.
 Basic collectd-based server monitoring. Sends stats to Graphite.
 
 With inspiration from [pboos/docker-collectd-graphite](https://github.com/pboos/docker-collectd-graphite). But not using python to replace the settings.
@@ -35,10 +36,6 @@ With inspiration from [pboos/docker-collectd-graphite](https://github.com/pboos/
 * `INTERVAL`
   - Controls how often registered read functions are called and with that the resolution of the collected data. (details: [collectd.conf man page](https://collectd.org/wiki/index.php/Interval))
   - Optional, defaults to 10.
-
-
-## collectd
-monitor group: grafana & graphite & collectd
 
 ## Example execution
 > run command, replace HOSTNAME GRAPHITE_HOST correct with your server.
