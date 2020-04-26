@@ -3,7 +3,7 @@ LABEL maintainer="WilliamGuo <634206396@qq.com>"
 
 ENV     DEBIAN_FRONTEND noninteractive
 
-RUN     apt-get -y update && \
+RUN     apt update && \
         apt-get -y install collectd
 
 # add a fake mtab for host disk stats
