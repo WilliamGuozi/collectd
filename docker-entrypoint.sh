@@ -1,6 +1,8 @@
+#!/bin/bash
+
 set -e
 
-COLLECTD_CONFIG=/hostfs/opt/ops-collectd/collectd.conf
+COLLECTD_CONFIG={$1:-/hostfs/opt/ops-collectd/collectd.conf}
 
 if [ -f "$COLLECTD_CONFIG" ]; then
     echo "$COLLECTD_CONFIG has been existed"
@@ -111,3 +113,6 @@ LoadPlugin write_graphite
 </Plugin>
 
 EOF
+
+collectd -f -C $COLLECTD_CONFIG
+exec "$@"

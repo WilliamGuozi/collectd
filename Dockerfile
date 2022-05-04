@@ -9,4 +9,7 @@ RUN   apk add collectd-plugins-all
 # add a fake mtab for host disk stats
 ADD   etc_mtab /etc/mtab
 
-CMD ["collectd", "-f", "-C", "/hostfs/opt/ops-collectd/collectd.conf"]
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["collectd", "-f"]
