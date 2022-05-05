@@ -2,12 +2,12 @@
 
 set -e
 
-COLLECTD_CONFIG=${1:-/collectd.conf}
+COLLECTD_CONFIG=${1:-/etc/collectd/collectd.conf}
 
-if [ -f "$COLLECTD_CONFIG" ]; then
-    echo "$COLLECTD_CONFIG has been existed"
-    exit
-fi
+#if [ -f "$COLLECTD_CONFIG" ]; then
+#    echo "$COLLECTD_CONFIG has been existed"
+#    exit
+#fi
 
 cd $(dirname $0)
 
@@ -112,5 +112,5 @@ LoadPlugin write_graphite
 
 EOF
 #
-#collectd -f -C ${COLLECTD_CONFIG}
+collectd -f -C ${COLLECTD_CONFIG}
 exec "$@"
