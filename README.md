@@ -59,7 +59,7 @@ echo "Image $image_url pull failed or No container ops-collectd."
 docker run -d \
  --cpus 1 \
  -m 1G \
- -e GRAPHITE_PREFIX=collectd. \
+ -e GRAPHITE_PREFIX=collectd \
  -e GRAPHITE_PORT=2003 \
  -e GRAPHITE_HOST=locahost \
  -e REPORT_BY_CPU=false \
