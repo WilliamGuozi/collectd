@@ -9,8 +9,6 @@ if [ -f "$COLLECTD_CONFIG" ]; then
     exit
 fi
 
-mkdir -p /hostfs/opt/ops-collectd
-
 cd $(dirname $0)
 
 cat >> $COLLECTD_CONFIG << EOF
