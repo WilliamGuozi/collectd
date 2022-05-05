@@ -11,7 +11,7 @@ fi
 
 cd $(dirname $0)
 
-cat >> $COLLECTD_CONFIG << EOF
+cat > $COLLECTD_CONFIG << EOF
 
 FQDNLookup   false
 

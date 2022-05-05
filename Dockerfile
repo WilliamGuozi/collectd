@@ -13,4 +13,4 @@ COPY docker-entrypoint.sh /
 RUN  chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["collectd", "-f", "-C", "/collectd.conf"]
+CMD ["/collectd.conf"]
