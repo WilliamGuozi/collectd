@@ -113,4 +113,4 @@ LoadPlugin write_graphite
 EOF
 
 collectd -f -C ${COLLECTD_CONFIG}
-exec "$@"
+#exec "$@"
