@@ -3,13 +3,15 @@
 set -e
 
 COLLECTD_CONFIG=${1:-/etc/collectd/collectd.conf}
+COLLECTD_DIR=$(dirname "$COLLECTD_CONFIG")
 
-#if [ -f "$COLLECTD_CONFIG" ]; then
-#    echo "$COLLECTD_CONFIG has been existed"
-#    exit
-#fi
+if [ ! -f "$COLLECTD_CONFIG" ]; then
 
-cd $(dirname $0)
+  if [ ! -d "$COLLECTD_DIR" ]; then
+    mkdir -p $COLLECTD_DIR
+  fi
+
+#cd $(dirname $0)
 
 cat > $COLLECTD_CONFIG << EOF
 
@@ -92,7 +94,7 @@ LoadPlugin write_graphite
 </Plugin>
 
 <Plugin write_graphite>
-  <Node "Dcmining">
+  <Node "example">
     Host "${GRAPHITE_HOST:-locahost}"
     Port "${GRAPHITE_PORT:-2003}"
     Prefix "${GRAPHITE_PREFIX:-collectd}."
@@ -111,5 +113,7 @@ LoadPlugin write_graphite
 </Plugin>
 
 EOF
+
+fi
 #
 exec collectd -f -C ${COLLECTD_CONFIG}
