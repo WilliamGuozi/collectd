@@ -2,7 +2,7 @@
 
 set -e
 
-COLLECTD_CONFIG={$1:-/hostfs/opt/ops-collectd/collectd.conf}
+COLLECTD_CONFIG=${1:-/hostfs/opt/ops-collectd/collectd.conf}
 
 if [ -f "$COLLECTD_CONFIG" ]; then
     echo "$COLLECTD_CONFIG has been existed"
