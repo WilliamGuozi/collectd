@@ -15,6 +15,7 @@ if [ ! -f "$COLLECTD_CONFIG" ]; then
 
 cat > $COLLECTD_CONFIG << EOF
 
+Hostname    "${HOSTNAME:-$HOSTNAME}"
 FQDNLookup   false
 
 Interval     ${INTERVAL:-10}
