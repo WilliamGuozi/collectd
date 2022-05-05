@@ -10,6 +10,7 @@ RUN   apk add collectd-plugins-all
 ADD   etc_mtab /etc/mtab
 
 COPY docker-entrypoint.sh /
+RUN  chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["collectd", "-f"]
