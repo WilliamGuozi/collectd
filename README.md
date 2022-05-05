@@ -67,6 +67,7 @@ docker run -d \
  --privileged \
  --restart always \
  -v /:/hostfs:ro \
+ -v $PWD:/etc/collectd \
  --name "collectd" \
  $DOCKER_IMAGE
 ```
