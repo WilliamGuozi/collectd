@@ -46,7 +46,7 @@ With inspiration from [pboos/docker-collectd-graphite](https://github.com/pboos/
 #
 
 # 获取镜像地址
-DOCKER_IMAGE="${1:-reg.dcmining.io/dcmining/ops/collectd:v20220430-8}"
+DOCKER_IMAGE="${1:-reg.dcmining.io/dcmining/ops/collectd:latest}"
 
 # 判断容器是否存在，并将其删除
 docker pull $DOCKER_IMAGE && \
@@ -59,10 +59,14 @@ echo "Image $image_url pull failed or No container ops-collectd."
 docker run -d \
  --cpus 1 \
  -m 1G \
- --net=host \
+ -e GRAPHITE_PREFIX=collectd. \
+ -e GRAPHITE_PORT=2003 \
+ -e GRAPHITE_HOST=locahost \
+ -e REPORT_BY_CPU=false \
+ -e INTERVAL=10 \
  --privileged \
  --restart always \
  -v /:/hostfs:ro \
- --name "ops-collectd" \
+ --name "collectd" \
  $DOCKER_IMAGE
 ```
