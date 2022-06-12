@@ -5,11 +5,11 @@ set -e
 COLLECTD_CONFIG=${1:-/etc/collectd/collectd.conf}
 COLLECTD_DIR=$(dirname "$COLLECTD_CONFIG")
 
-if [ ! -f "$COLLECTD_CONFIG" ]; then
-
-  if [ ! -d "$COLLECTD_DIR" ]; then
-    mkdir -p $COLLECTD_DIR
-  fi
+#if [ ! -f "$COLLECTD_CONFIG" ]; then
+#
+#  if [ ! -d "$COLLECTD_DIR" ]; then
+#    mkdir -p $COLLECTD_DIR
+#  fi
 
 #cd $(dirname $0)
 
@@ -115,6 +115,6 @@ LoadPlugin write_graphite
 
 EOF
 
-fi
+#fi
 #
 exec collectd -f -C ${COLLECTD_CONFIG}
