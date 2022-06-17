@@ -5,11 +5,11 @@ set -e
 COLLECTD_CONFIG=${1:-/etc/collectd/collectd.conf}
 COLLECTD_DIR=$(dirname "$COLLECTD_CONFIG")
 
-#if [ ! -f "$COLLECTD_CONFIG" ]; then
-#
-#  if [ ! -d "$COLLECTD_DIR" ]; then
-#    mkdir -p $COLLECTD_DIR
-#  fi
+if [ ! -f "$COLLECTD_CONFIG" ]; then
+
+  if [ ! -d "$COLLECTD_DIR" ]; then
+    mkdir -p $COLLECTD_DIR
+  fi
 
 #cd $(dirname $0)
 
@@ -53,33 +53,7 @@ LoadPlugin write_graphite
 
 
 <Plugin df>
-	Device "/dev/sda1"
-	Device "/dev/sda15"
-  MountPoint "/etc/resolv.conf"
-  MountPoint "/etc/hostname"
-  MountPoint "/etc/hosts"
-  FSType rootfs
-  FSType sysfs
-  FSType proc
-  FSType devtmpfs
-  FSType devpts
-  FSType tmpfs
-  FSType fusectl
-  FSType cgroup
-  FSType overlay
-  FSType debugfs
-  FSType pstore
-  FSType securityfs
-  FSType hugetlbfs
-  FSType squashfs
-  FSType mqueue
-  FSType shm
-	IgnoreSelected true
-	LogOnce false
-	ReportByDevice false
-	ReportInodes false
-	ValuesAbsolute true
-	ValuesPercentage false
+	FSType "ext4"
 </Plugin>
 
 <Plugin disk>
