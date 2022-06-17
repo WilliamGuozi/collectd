@@ -89,6 +89,6 @@ LoadPlugin write_graphite
 
 EOF
 
-#fi
+fi
 #
 exec collectd -f -C ${COLLECTD_CONFIG}
