@@ -40,13 +40,64 @@ With inspiration from [pboos/docker-collectd-graphite](https://github.com/pboos/
 ## Example execution
 > run command, replace HOSTNAME GRAPHITE_HOST correct with your server.
 ```bash
+#!/bin/bash
+#
+# Created by William Guozi
+#
+
+# 获取镜像地址
+DOCKER_IMAGE="${1:-williamguozi/collectd:latest}"
+
+# 判断容器是否存在，并将其删除
+docker pull $DOCKER_IMAGE && \
+docker ps -a | awk -F' ' '{print $NF}' | grep "devops-collectd" && \
+docker stop devops-collectd && \
+docker rm -f "devops-collectd" || \
+echo "Image $image_url pull failed or No container devops-collectd."
+
+# 启动容器
 docker run -d \
- --net=host \
+ --cpus 1 \
+ -m 1G \
+ -e HOSTNAME=servername \
+ -e GRAPHITE_PREFIX=collectd \
+ -e GRAPHITE_PORT=2003 \
+ -e GRAPHITE_HOST=locahost \
+ -e REPORT_BY_CPU=false \
+ -e INTERVAL=10 \
  --privileged \
  --restart always \
  -v /:/hostfs:ro \
- -e HOST_NAME=myhostname \
- -e GRAPHITE_HOST=graphite.glinux.top \
- --name collectd \
- williamguozi/collectd:latest
+ --name devops-collectd \
+ $DOCKER_IMAGE
+```
+
+> or run command, use your customize config file
+```bash
+#!/bin/bash
+#
+# Created by William Guozi
+#
+
+# 获取镜像地址
+DOCKER_IMAGE="${1:-williamguozi/collectd:latest}"
+
+# 判断容器是否存在，并将其删除
+docker pull $DOCKER_IMAGE && \
+docker ps -a | awk -F' ' '{print $NF}' | grep "devops-collectd" && \
+docker stop devops-collectd && \
+docker rm -f "devops-collectd" || \
+echo "Image $image_url pull failed or No container devops-collectd."
+
+# 启动容器
+
+docker run -d \
+ --cpus 1 \
+ -m 1G \
+ --privileged \
+ --restart always \
+ -v /:/hostfs:ro \
+ -v /opt/devops-collectd/collectd.conf:/etc/collectd/collectd.conf \
+ --name devops-collectd \
+ $DOCKER_IMAGE
 ```

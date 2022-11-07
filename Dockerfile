@@ -1,15 +1,15 @@
-FROM    ubuntu:latest
+FROM  alpine:3.14
 LABEL maintainer="WilliamGuo <634206396@qq.com>"
 
-ENV     DEBIAN_FRONTEND noninteractive
-
-RUN     apt update && \
-        apt-get -y install collectd
+RUN   apk update
+RUN   apk add collectd
+RUN   apk add --no-cache bash
+RUN   apk add collectd-plugins-all
 
 # add a fake mtab for host disk stats
-ADD     etc_mtab /etc/mtab
-ADD     collectd.conf.tpl /etc/collectd/collectd.conf.tpl
-COPY    entrypoint.sh /entrypoint.sh
+ADD   etc_mtab /etc/mtab
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["collectd", "-f"]
+COPY docker-entrypoint.sh /
+RUN  chmod +x /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
